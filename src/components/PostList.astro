@@ -1,0 +1,41 @@
+---
+import { formatDate, postUrl, readingTime, type Post } from "../lib/posts";
+interface Props {
+  posts: Post[];
+  heading?: "h2" | "h3";
+}
+const { posts, heading: Heading = "h2" } = Astro.props;
+---
+
+<ol class="post-list">
+  {posts.map((post) => (
+    <li>
+      <article class="post-summary">
+        <div class="post-meta">
+          <time datetime={post.data.date.toISOString()}>
+            {formatDate(post.data.date)}
+          </time>
+          <span aria-hidden="true">/</span>
+          <span>{readingTime(post)}</span>
+          {post.data.draft && <span class="draft-badge">Draft</span>}
+        </div>
+        <Heading class="post-title">
+          <a href={postUrl(post)}>
+            {post.data.title}
+            <span class="post-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        </Heading>
+        <p>{post.data.description}</p>
+        {post.data.tags.length > 0 && (
+          <ul class="tags" aria-label="Topics">
+            {post.data.tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+        )}
+      </article>
+    </li>
+  ))}
+</ol>

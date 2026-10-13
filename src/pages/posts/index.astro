@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostList from "../../components/PostList.astro";
+import { getPosts } from "../../lib/posts";
+const posts = await getPosts({ includeDrafts: import.meta.env.DEV });
+---
+
+<BaseLayout
+  title="Writing"
+  description="Essays and notes on software engineering, entrepreneurship, and building teams."
+>
+  <header class="page-heading">
+    <p class="eyebrow">The archive</p>
+    <h1>
+      Writing<span class="accent-text">.</span>
+    </h1>
+    <p>Things I've learned, things I'm building, and ideas worth sharing.</p>
+    <a class="text-link" href="/rss.xml">
+      Subscribe via RSS <span aria-hidden="true">↗</span>
+    </a>
+  </header>
+  <section aria-label="All posts">
+    <PostList posts={posts} />
+  </section>
+  {posts.length === 0 && (
+    <p class="empty-state">The first post is on its way.</p>
+  )}
+</BaseLayout>

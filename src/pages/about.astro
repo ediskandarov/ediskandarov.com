@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import portrait from "../../public/me.jpg";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../lib/site";
+---
+
+<BaseLayout
+  title="About"
+  description="I'm Eduard Iskandarov, a software engineer and entrepreneur. I build software, teams, and the occasional startup."
+>
+  <header class="page-heading">
+    <p class="eyebrow">The person behind the posts</p>
+    <h1>
+      Hi, I'm Eduard<span class="accent-text">.</span>
+    </h1>
+  </header>
+  <div class="about-layout">
+    <Image
+      src={portrait}
+      alt="Eduard Iskandarov"
+      width={320}
+      height={320}
+      widths={[240, 320, 640]}
+      sizes="(max-width: 640px) 240px, 320px"
+      class="portrait"
+    />
+    <div class="prose about-copy">
+      <p>
+        I'm a software engineer and entrepreneur. I enjoy building useful things
+        and figuring out how they work.
+      </p>
+      <p>
+        My experience spans high-load systems, big data, and helping a Southeast
+        Asian fintech startup through its early stages. I've also built teams
+        that can work autonomously.
+      </p>
+      <p>
+        I like working with Python and TypeScript, with a focus on security,
+        automation, and serverless applications.
+      </p>
+      <p>
+        This blog is a place to share what I learn along the way: technical
+        explorations, lessons from building businesses, and ideas still taking
+        shape.
+      </p>
+      <p>
+        Want to get in touch?{" "}
+        <a href={`mailto:${site.email}`}>Send me an email.</a>
+      </p>
+    </div>
+  </div>
+  <section class="elsewhere" aria-labelledby="elsewhere-title">
+    <h2 id="elsewhere-title">Elsewhere on the internet</h2>
+    <div>
+      {site.links.map((link) => (
+        <a class="text-link" href={link.href}>
+          {link.label} <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

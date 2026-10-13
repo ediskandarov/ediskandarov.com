@@ -14,6 +14,11 @@
 
 # production
 /build
+/dist/
+/.astro/
+
+# Large media is uploaded separately, never bundled into the site.
+/media/
 
 # misc
 .DS_Store

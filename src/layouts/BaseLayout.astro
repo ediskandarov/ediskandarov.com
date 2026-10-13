@@ -1,0 +1,130 @@
+---
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { getImage } from "astro:assets";
+import portrait from "../../public/me.jpg";
+import { site } from "../lib/site";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  article?: boolean;
+  date?: Date;
+  updated?: Date;
+  noindex?: boolean;
+}
+const {
+  title,
+  description = site.description,
+  image,
+  imageAlt = image ? (title ?? site.name) : site.name,
+  article = false,
+  date,
+  updated,
+  noindex = false,
+} = Astro.props;
+const pageTitle = title ? `${title} — ${site.name}` : site.title;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const defaultImage = image
+  ? undefined
+  : await getImage({ src: portrait, width: 600, format: "jpg", quality: 80 });
+const socialImage = new URL(image ?? defaultImage!.src, Astro.site);
+const path = Astro.url.pathname.replace(/\/$/, "");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${site.name}'s blog`}
+      href="/rss.xml"
+    />
+    <meta name="color-scheme" content="light dark" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:type" content={article ? "article" : "website"} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title ?? site.title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title ?? site.title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    {date && (
+      <meta property="article:published_time" content={date.toISOString()} />
+    )}
+    {updated && (
+      <meta property="article:modified_time" content={updated.toISOString()} />
+    )}
+    <script is:inline>
+      (() => {
+        let saved;
+        try {
+          saved = localStorage.getItem("theme");
+        } catch {}
+        document.documentElement.dataset.theme =
+          saved === "dark" || saved === "light"
+            ? saved
+            : matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+      })();
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <div class="shell">
+      <header class="site-header">
+        <a class="wordmark" href="/" aria-label={`${site.name}, home`}>
+          eduard<span>.</span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a
+            href="/posts"
+            aria-current={path.startsWith("/posts") ? "page" : undefined}
+          >
+            Writing
+          </a>
+          <a
+            href="/about"
+            aria-current={path === "/about" ? "page" : undefined}
+          >
+            About
+          </a>
+          <ThemeToggle />
+        </nav>
+      </header>
+      <main id="main" tabindex="-1">
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <span>
+          © {new Date().getFullYear()} {site.name}
+        </span>
+        <div>
+          <a href={site.links[0].href}>GitHub</a>
+          <a href={`mailto:${site.email}`}>Email</a>
+          <a href="/rss.xml">
+            RSS <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
