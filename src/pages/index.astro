@@ -7,36 +7,25 @@ const posts = await getPosts({ includeDrafts: import.meta.env.DEV });
 
 <BaseLayout>
   <section class="hero" aria-labelledby="intro-title">
-    <p class="eyebrow">
-      <span class="accent-dot" aria-hidden="true"></span> Eduard Iskandarov /
-      Personal blog
-    </p>
-    <h1 id="intro-title">
-      Notes from
-      <br />
-      <span class="serif-accent">building things.</span>
-    </h1>
+    <h1 id="intro-title">Personal notes</h1>
     <p class="hero-description">
       I'm a software engineer and entrepreneur. This is where I write about
       software, startups, and the people behind them.
     </p>
     <a class="text-link" href="/about">
-      A little about me <span aria-hidden="true">↗</span>
+      About me
     </a>
   </section>
   <section class="writing-section" aria-labelledby="writing-title">
     <div class="section-heading">
-      <h2 id="writing-title">Latest writing</h2>
+      <h2 id="writing-title">Recent posts</h2>
       <a class="text-link" href="/posts">
-        All posts <span aria-hidden="true">→</span>
+        All posts
       </a>
     </div>
     <PostList posts={posts.slice(0, 5)} heading="h3" />
     {posts.length === 0 && (
-      <p class="empty-state">
-        The first post is on its way.{" "}
-        <a href="/rss.xml">Follow along via RSS.</a>
-      </p>
+      <p class="empty-state">The first post is on its way.</p>
     )}
   </section>
 </BaseLayout>

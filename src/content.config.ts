@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
+import { site } from "./lib/site";
 
 const posts = defineCollection({
   loader: glob({
@@ -14,7 +15,7 @@ const posts = defineCollection({
     description: z.string().min(1),
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
-    author: z.string().default("Eduard Iskandarov"),
+    author: z.string().default(site.name),
     draft: z.boolean().default(false),
     tags: z.array(z.string().min(1)).default([]),
     image: z.string().optional(),

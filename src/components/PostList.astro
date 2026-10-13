@@ -20,12 +20,7 @@ const { posts, heading: Heading = "h2" } = Astro.props;
           {post.data.draft && <span class="draft-badge">Draft</span>}
         </div>
         <Heading class="post-title">
-          <a href={postUrl(post)}>
-            {post.data.title}
-            <span class="post-arrow" aria-hidden="true">
-              ↗
-            </span>
-          </a>
+          <a href={postUrl(post)}>{post.data.title}</a>
         </Heading>
         <p>{post.data.description}</p>
         {post.data.tags.length > 0 && (

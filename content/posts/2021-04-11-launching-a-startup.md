@@ -1,8 +1,8 @@
 ---
 title: Ten Things I Wish I Knew Before Launching a Startup.
-description: The blog post about Eduard's entrepreneurship lessons.
+description: The blog post about Ed's entrepreneurship lessons.
 date: "2020-04-11"
-author: Eduard Iskandarov
+author: Ed Iskandarov
 ---
 
 # Ten Things I Wish I Knew Before Launching a Startup.

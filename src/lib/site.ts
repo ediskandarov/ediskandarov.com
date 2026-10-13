@@ -1,12 +1,11 @@
 export const site = {
-  name: "Eduard Iskandarov",
-  title: "Eduard Iskandarov — Notes on building things",
+  name: "Ed Iskandarov",
+  title: "Ed Iskandarov — Personal notes",
   description:
-    "Notes on software, startups, and building teams, by Eduard Iskandarov.",
-  email: "eduard.iskandarov@yandex.ru",
+    "Notes on software, startups, and building teams, by Ed Iskandarov.",
+  email: "edikexp@gmail.com",
   links: [
-    { label: "GitHub", href: "https://github.com/emcpow2" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/emcpow2/" },
-    { label: "Twitter", href: "https://twitter.com/emcpow2" },
+    { label: "GitHub", href: "https://github.com/ediskandarov" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/ediskandarov/" },
   ],
 };

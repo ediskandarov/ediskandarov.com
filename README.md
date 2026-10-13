@@ -1,6 +1,6 @@
 # ediskandarov.com
 
-Eduard Iskandarov's personal blog. Built with Astro, TypeScript, and plain CSS. Posts are Markdown; the output is a static site.
+Ed Iskandarov's personal blog. Built with Astro, TypeScript, and plain CSS. Posts are Markdown; the output is a static site.
 
 ## Work locally
 
@@ -48,9 +48,9 @@ git add content/posts/something-i-learned-while-building.md
 git commit -m "📝 Publish something I learned while building"
 ```
 
-The filename becomes `/posts/something-i-learned-while-building`. Keep it stable after publishing. Dates sort the archive; the filename does not need a date prefix. `author` defaults to Eduard Iskandarov. Optional `updated`, `image`, and `imageAlt` fields set the update date and social preview image. Use a public image URL or a path such as `/images/my-post.jpg`.
+The filename becomes `/posts/something-i-learned-while-building`. Keep it stable after publishing. Dates sort the archive; the filename does not need a date prefix. `author` defaults to Ed Iskandarov. Optional `updated`, `image`, and `imageAlt` fields set the update date and social preview image. Use a public image URL or a path such as `/images/my-post.jpg`.
 
-Drafts are excluded from the production homepage, archive, routes, RSS, and sitemap. RSS also excludes drafts in the development preview.
+Drafts are excluded from the production homepage, archive, routes, and sitemap.
 
 ## Embed a video
 
@@ -99,14 +99,14 @@ Large videos and downloads are uploaded separately, with their URLs referenced i
 ## Find your way around
 
 - `content/posts/`: articles and drafts.
-- `src/pages/`: homepage, archive, articles, About, RSS, robots, and 404.
+- `src/pages/`: homepage, archive, articles, About, robots, and 404.
 - `src/content.config.ts`: validated post metadata.
 - `src/lib/site.ts`: biography links, email, and site description.
 - `src/lib/blog-markdown.mjs`: video embeds and legacy title handling.
-- `src/styles/global.css`: layout, typography, and both color themes.
+- `src/styles/global.css`: the monochrome layout and typography.
 - `public/`: small images and files served at their original paths.
 
-The theme follows the system preference until a reader selects light or dark, then remembers that choice. There are no external fonts or analytics scripts. The historical posts and their publication dates are preserved, including the startup article whose filename contains 2021 while its frontmatter says 2020.
+The design uses a white background, black serif text, and plain underlined links. There are no external fonts or analytics scripts. The historical posts and their publication dates are preserved, including the startup article whose filename contains 2021 while its frontmatter says 2020.
 
 ## Deployment comes next
 

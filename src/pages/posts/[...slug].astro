@@ -43,7 +43,7 @@ const structuredData = {
   <article class="post">
     <header class="article-heading">
       <a class="back-link" href="/posts">
-        <span aria-hidden="true">←</span> All writing
+        All writing
       </a>
       <div class="post-meta">
         <time datetime={post.data.date.toISOString()}>
@@ -71,9 +71,7 @@ const structuredData = {
     </header>
     {outline.length > 2 && (
       <details class="table-of-contents">
-        <summary>
-          In this post <span aria-hidden="true">↓</span>
-        </summary>
+        <summary>Contents</summary>
         <nav aria-label="Table of contents">
           <ol>
             {outline.map((heading) => (
@@ -90,10 +88,7 @@ const structuredData = {
     </div>
     <footer class="article-footer">
       <a class="text-link" href="/posts">
-        <span aria-hidden="true">←</span> More writing
-      </a>
-      <a class="text-link" href="/rss.xml">
-        Follow via RSS <span aria-hidden="true">↗</span>
+        More writing
       </a>
     </footer>
   </article>

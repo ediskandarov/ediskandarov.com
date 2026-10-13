@@ -2,7 +2,7 @@
 title: Hello, World!
 description: The first post in the blog.
 date: "2020-01-09"
-author: Eduard Iskandarov
+author: Ed Iskandarov
 ---
 
 # Hello, World!
