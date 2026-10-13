@@ -1,8 +1,8 @@
 ---
 title: "I Made DOOM Run Inside the Ethereum Virtual Machine. Then I Tried to Play It."
 description: "Porting DOOM's gameplay and software renderer to the EVM, investigating native memory behavior, and trying to play the result."
-date: "2026-10-13"
-draft: true
+date: "2026-10-14"
+draft: false
 tags: [engineering, ethereum, doom]
 ---
 
