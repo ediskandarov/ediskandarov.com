@@ -119,3 +119,46 @@ test("only a matching first H1 is removed, preserving other article headings", (
     heading,
   ]);
 });
+
+test("production media URLs cover Markdown, raw players, posters, and links", async () => {
+  const renderer = await unified({
+    remarkPlugins: [
+      [blogMarkdown, { mediaBaseUrl: "https://media.example.com/" }],
+    ],
+  }).createRenderer({});
+  const { code } = await renderer.render(
+    [
+      "![Screenshot](/media/posts/demo/screen.png)",
+      "",
+      "![Clip](/media/posts/demo/movie.mp4)",
+      "",
+      '<video controls poster="/media/posts/demo/poster.png"><source src="/media/posts/demo/movie.mp4?one=1&amp;two=2"><a href="/media/posts/demo/movie.mp4">Download</a></video>',
+      "",
+      "[Reference][ref]",
+      "",
+      "[ref]: /media/posts/demo/evidence.json",
+      "",
+      "![Site image](/images/small.svg)",
+    ].join("\n"),
+  );
+  assert.doesNotMatch(code, /(?:src|href|poster)="\/media\//);
+  assert.match(
+    code,
+    /src="https:\/\/media.example.com\/posts\/demo\/screen.png"/,
+  );
+  assert.match(
+    code,
+    /poster="https:\/\/media.example.com\/posts\/demo\/poster.png"/,
+  );
+  assert.match(
+    code,
+    /href="https:\/\/media.example.com\/posts\/demo\/evidence.json"/,
+  );
+  assert.match(code, /movie.mp4\?one=1(?:&amp;|&#x26;)two=2/);
+  assert.match(code, /src="\/images\/small.svg"/);
+});
+
+test("local preview keeps media paths local", () => {
+  const [node] = transform([image("/media/posts/demo/movie.mp4")]);
+  assert.match(node.value, /src="\/media\/posts\/demo\/movie.mp4"/);
+});

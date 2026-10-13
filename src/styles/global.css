@@ -447,3 +447,47 @@ main {
     text-decoration: none;
   }
 }
+
+/* Imported essays keep their original captions and visual grouping. */
+.prose .essay-visual {
+  margin-block: 2rem;
+}
+
+.prose .essay-visual img {
+  margin-inline: auto;
+}
+
+.prose .media-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: 1rem;
+}
+
+.prose .media-pair img {
+  width: 100%;
+}
+
+.prose .diagram-scroll {
+  overflow-x: auto;
+}
+
+.prose .diagram-scroll img {
+  width: 100%;
+  min-width: 660px;
+}
+
+.prose #EVM_ARCHITECTURE img {
+  min-width: 470px;
+  max-width: 557px;
+}
+
+.prose .next-article {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .prose .media-pair {
+    grid-template-columns: 1fr;
+  }
+}

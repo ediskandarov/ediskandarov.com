@@ -1,0 +1,83 @@
+{
+  "articleSha256": "a2016da0083a50fb3d09b3825e4e134a536ef2ccba9b57e8cab5ded2564b711b",
+  "assets": [
+    {
+      "file": "media/posts/doom-on-evm/ACCEPTED_E1M1_VIDEO.mp4",
+      "bytes": 13409260,
+      "sha256": "4a8be58e4d401e6fd628449e2b99874d359e13c213eb3153bab7e17b5566a3ae",
+      "storage": "external"
+    },
+    {
+      "file": "media/posts/doom-on-evm/CHEAT_CODE_PLAY.png",
+      "bytes": 126870,
+      "sha256": "a70705ef247f0a3af029e47999013b364daf4fb2974f939cb62f98539768c596",
+      "storage": "external"
+    },
+    {
+      "file": "media/posts/doom-on-evm/FIRST_FRAME.png",
+      "bytes": 67842,
+      "sha256": "39e0ad5f7239e12eadd5a09b55daf2c34d7c21df5fe3566e8e6ec3a9d7d45813",
+      "storage": "external"
+    },
+    {
+      "file": "media/posts/doom-on-evm/FIRST_MOVEMENT.gif",
+      "bytes": 464534,
+      "sha256": "3ad0c7888349fb80941254f1ed8eee781c27173f0bb433be3aed18ad49e875ba",
+      "storage": "external"
+    },
+    {
+      "file": "media/posts/doom-on-evm/FIRST_SAMPLED_SPEEDRUN.mp4",
+      "bytes": 2360559,
+      "sha256": "cbc0f78a4b0da044e688cb2d5186ebd59c180cf95b5f94b773df0798c851d939",
+      "storage": "external"
+    },
+    {
+      "file": "media/posts/doom-on-evm/FULL_RATE_SPEEDRUN.mp4",
+      "bytes": 8438727,
+      "sha256": "9c03e9a9b2d21ebe05cd572f38c482a436001b54d38676dd3ab5c449d38b160e",
+      "storage": "external"
+    },
+    {
+      "file": "media/posts/doom-on-evm/MELT_WIPE.gif",
+      "bytes": 4075765,
+      "sha256": "96ccd13c24800271e7aeb222454ccc2d6a1731fb453f4e0e1bb2af4b545d5adf",
+      "storage": "external"
+    },
+    {
+      "file": "media/posts/doom-on-evm/PUNCH_REVERT.png",
+      "bytes": 191979,
+      "sha256": "c0742b00659a1ab4f98098da343e4204faf337657b83f80201b1de30b90ff37b",
+      "storage": "external"
+    },
+    {
+      "file": "media/posts/doom-on-evm/STATUS_BAR.png",
+      "bytes": 128108,
+      "sha256": "2888fda6d0f82ee830c38a165b291392a178f351ea9e41d978c05266bef2bdfe",
+      "storage": "external"
+    },
+    {
+      "file": "media/posts/doom-on-evm/SYNTHETIC_TRANSPORT.png",
+      "bytes": 48989,
+      "sha256": "8f05a601163eeca108fa39a60f1fd62b76cbefb236f6b33b6b5c13a632743172",
+      "storage": "external"
+    },
+    {
+      "file": "public/images/posts/doom-on-evm/EVM_ARCHITECTURE.svg",
+      "bytes": 18059,
+      "sha256": "1070dd10c84be5448d1032fa3276c1f9348b4dc73a0d65c4e3a59718b0386a53",
+      "storage": "site"
+    },
+    {
+      "file": "public/images/posts/doom-on-evm/MEMORY-NEIGHBORHOODS.svg",
+      "bytes": 6659,
+      "sha256": "22d1ecc5031eb6694070a0c83a9f86bd69760456a1d8787cd9f61ced899021a5",
+      "storage": "site"
+    },
+    {
+      "file": "public/images/posts/doom-on-evm/SPEEDRUN_PIPELINE.svg",
+      "bytes": 19750,
+      "sha256": "2f4499cbaf724b20caf0b74b73db1528a251cad5ce701440a4c36715e3066e58",
+      "storage": "site"
+    }
+  ]
+}

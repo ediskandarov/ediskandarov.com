@@ -16,6 +16,8 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL || 'https://media.ediskandarov.com' }}
     steps:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -28,8 +30,17 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Validate site and Cloudflare configuration
+      - name: Validate site, media, and Cloudflare configuration
         run: npm run ci
+      - name: Upload media to R2 with HTTP metadata
+        env:
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+          R2_JURISDICTION: ${{ vars.R2_JURISDICTION }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npm run media:upload
+      - name: Verify public media before deploying
+        run: npm run media:verify
       - name: Deploy static site
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
