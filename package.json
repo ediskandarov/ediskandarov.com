@@ -10,6 +10,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "preview:cloudflare": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:dry-run": "wrangler deploy --dry-run",
+    "ci": "npm run format:check && npm run check && npm test && npm run build && npm run deploy:dry-run",
     "check": "astro check",
     "type-check": "astro check",
     "test": "node --test",
@@ -27,7 +31,8 @@
     "@astrojs/check": "^0.9.10",
     "prettier": "^3.9.10",
     "prettier-plugin-astro": "^1.1.1",
-    "typescript": "^6.0.0"
+    "typescript": "^6.0.0",
+    "wrangler": "4.150.0"
   },
   "license": "MIT"
 }

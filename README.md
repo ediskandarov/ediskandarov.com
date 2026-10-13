@@ -108,6 +108,42 @@ Large videos and downloads are uploaded separately, with their URLs referenced i
 
 The design uses a white background, black serif text, and plain underlined links. There are no external fonts or analytics scripts. The historical posts and their publication dates are preserved, including the startup article whose filename contains 2021 while its frontmatter says 2020.
 
-## Deployment comes next
+## Cloudflare and GitHub Actions
 
-The build produces portable static files in `dist/`, with canonical URLs for `https://ediskandarov.com`. It is ready for a later Cloudflare deployment. Hosting, DNS, R2 uploads, and automatic publishing are not configured yet.
+Wrangler is pinned in `package.json`. `wrangler.jsonc` serves the static output in `dist/` as the Worker `ediskandarov-blog`, preserves URLs without trailing slashes, and uses the generated `404.html` for missing pages. The canonical site URL is `https://ediskandarov.com`.
+
+Run the same validation as GitHub Actions locally:
+
+```sh
+npm run ci
+```
+
+This checks formatting and types, runs tests, builds the site, and runs a Wrangler deployment dry run without publishing. To preview Cloudflare's actual routing locally:
+
+```sh
+npm run preview:cloudflare
+```
+
+The **CI** workflow runs on pushes to `main`, pull requests, and manual requests. The **Deploy to Cloudflare** workflow is started manually from GitHub's Actions tab, with `main` selected. It runs all checks again before deploying. Deployment uses the locked Wrangler version and credentials are available only to the deployment step.
+
+### Configure the two GitHub secrets
+
+In this repository's **Settings → Secrets and variables → Actions**, add:
+
+| Repository secret       | Value                                                                                                                               |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `CLOUDFLARE_ACCOUNT_ID` | The account ID from the Cloudflare dashboard.                                                                                       |
+| `CLOUDFLARE_API_TOKEN`  | A Cloudflare API token scoped to that account, with **Account → Workers Scripts → Edit** and **Account → Account Settings → Read**. |
+
+Create the API token in Cloudflare's **My Profile → API Tokens**. Add its value directly as a GitHub secret; keep it out of Git and chat. This initial configuration deploys to the account's `workers.dev` address. Custom-domain routing and R2 media storage will be configured in subsequent steps.
+
+After the secrets are added, open **Actions → Deploy to Cloudflare → Run workflow**, select `main`, and run it. The deployment log prints the site URL. If prompted by Cloudflare during account setup, choose a Workers subdomain in the dashboard first.
+
+For an authenticated local deployment, use:
+
+```sh
+npm exec wrangler -- login
+npm run deploy
+```
+
+GitHub Actions handles CI and deployment for this project; there is no need to connect the repository to Cloudflare Workers Builds as well.
