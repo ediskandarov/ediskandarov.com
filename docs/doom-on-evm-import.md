@@ -25,12 +25,12 @@ Open <http://127.0.0.1:4327/posts/doom-on-evm>. The post is a draft with a
 provisional October 13 date. Keep `draft: true` until the public media URLs work
 and the author selects the publication date.
 
-The 10 unchanged media files are copied into the ignored
+The 10 unchanged media files are tracked in Git under the
 `media/posts/doom-on-evm/` directory (approximately 28 MiB total). The three
 rendered SVGs are tracked in `public/images/posts/doom-on-evm/`. See
 [the exact asset hashes and sizes](doom-on-evm-assets.json).
-If moving to another machine, transfer the ignored media separately. Their source
-copies on this machine are under
+Git checkout includes the media for local review and future CI uploads. Their
+original source copies on this machine are under
 `/Users/eduard/sandbox/doom-evm-article-sources/media/selected/`.
 
 The article's prose and captions are unchanged. Adaptations are frontmatter,
@@ -41,11 +41,12 @@ manuscript: it supplies assets only, not the imported prose.
 
 ## Handoff: public large-file storage
 
-The next agent owns cloud provisioning and uploads. No bucket was created and no
-objects were uploaded during this import. Credentials must remain outside Git.
+No bucket was created and no objects were uploaded during the original import.
+The user has since created an R2 bucket and connected `media.ediskandarov.com`.
+Uploads remain to be implemented. Credentials must remain outside Git.
 
-1. Inspect the user's existing Cloudflare setup and choose or create the public
-   article-media R2 bucket. Connect `media.ediskandarov.com` to it. Use the
+1. Confirm the existing article-media R2 bucket name and its connection to
+   `media.ediskandarov.com`. Refer to the
    [Cloudflare custom-domain instructions](https://developers.cloudflare.com/r2/buckets/public-buckets/).
 2. Upload only the 10 `storage: external` entries in the manifest. Object keys are
    the manifest `file` values with the leading `media/` removed; for example,
@@ -76,9 +77,9 @@ objects were uploaded during this import. Credentials must remain outside Git.
    sitemap. Run `npm run ci` if deployment configuration changes. Publishing or
    deploying the site remains a separate action.
 
-A fresh Git checkout has the manuscript and diagrams, but intentionally lacks
-large local media. It can still build because the post is a draft and production
-uses external URLs; copy the manifest-listed files separately for local review.
+A fresh Git checkout includes the manuscript, diagrams, and all 10 external
+media source files. Production uses external URLs and excludes the media bytes
+from the site output; uploads to R2 are a separate step.
 
 ## Verified checkpoint
 

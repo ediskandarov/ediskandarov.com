@@ -94,7 +94,7 @@ For a poster image or captions, use HTML directly in Markdown:
 
 Videos with speech should include captions. For browser compatibility, MP4 with H.264 video and AAC audio is a useful default. Export for web playback (including fast start) before uploading; object storage does not transcode files.
 
-Large videos and downloads are uploaded separately, with their URLs referenced in posts. Keep local originals in the ignored `media/` directory or outside this repository. Cloudflare Pages and Workers Static Assets each have a 25 MiB limit per file. The planned media host is an R2 bucket on `media.ediskandarov.com`; it has not been provisioned yet. The blog does not need storage credentials or a rebuild when a media file is uploaded to an existing URL.
+Large videos and downloads are uploaded separately, with their URLs referenced in posts. Track source files in `media/` so GitHub Actions can retrieve them for upload; they stay outside the static site output. Cloudflare Pages and Workers Static Assets each have a 25 MiB limit per file. An R2 bucket is connected to `media.ediskandarov.com`; automated uploads have not been implemented yet. The blog does not need storage credentials or a rebuild when a media file is uploaded to an existing URL.
 
 ## Find your way around
 
@@ -135,7 +135,7 @@ In this repository's **Settings → Secrets and variables → Actions**, add:
 | `CLOUDFLARE_ACCOUNT_ID` | The account ID from the Cloudflare dashboard.                                                                                       |
 | `CLOUDFLARE_API_TOKEN`  | A Cloudflare API token scoped to that account, with **Account → Workers Scripts → Edit** and **Account → Account Settings → Read**. |
 
-Create the API token in Cloudflare's **My Profile → API Tokens**. Add its value directly as a GitHub secret; keep it out of Git and chat. This initial configuration deploys to the account's `workers.dev` address. Custom-domain routing and R2 media storage will be configured in subsequent steps.
+Create the API token in Cloudflare's **My Profile → API Tokens**. Add its value directly as a GitHub secret; keep it out of Git and chat. This initial configuration deploys to the account's `workers.dev` address. Custom-domain routing for the blog and automated R2 uploads will be configured in subsequent steps.
 
 After the secrets are added, open **Actions → Deploy to Cloudflare → Run workflow**, select `main`, and run it. The deployment log prints the site URL. If prompted by Cloudflare during account setup, choose a Workers subdomain in the dashboard first.
 
@@ -151,7 +151,7 @@ GitHub Actions handles CI and deployment for this project; there is no need to c
 ## Large media preview and publication
 
 Posts can use `/media/posts/<slug>/<filename>` in Markdown images, links, and
-HTML `src`, `href`, and `poster` attributes. Put local copies under the ignored
+HTML `src`, `href`, and `poster` attributes. Commit source files under the
 `media/posts/<slug>/` directory. `npm run dev` serves them with byte-range support
 for video seeking. They are never copied into `dist/`.
 

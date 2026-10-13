@@ -8,8 +8,8 @@
 - Posts live in `content/posts`. Preserve published filenames, URLs, dates, and article text unless a content change is requested.
 - Drafts must stay out of production pages and the sitemap.
 - Do not add RSS feeds or subscription links.
-- Large media belongs in external storage, with URLs in posts. Never commit videos or credentials.
+- Track source media in `media/` so GitHub Actions can upload it to external storage. Serve large media from external URLs and keep it out of `public/` and `dist/`. Never commit credentials.
 - Run `npm run check`, `npm test`, and `npm run build` for changes to the framework or content pipeline. Check responsive layouts for design changes.
-- Deployment uses Cloudflare Workers Static Assets, configured in `wrangler.jsonc`. `ediskandarov.com` is the canonical domain; R2 is planned for large media.
+- Deployment uses Cloudflare Workers Static Assets, configured in `wrangler.jsonc`. `ediskandarov.com` is the canonical domain; an R2 bucket is connected to `media.ediskandarov.com` for large media.
 - Run `npm run ci` for changes to CI or deployment configuration. This includes a Wrangler dry run.
 - GitHub CI checks `main` and pull requests. The first production deployment is a manual workflow on `main`; credentials belong in GitHub Actions secrets.
