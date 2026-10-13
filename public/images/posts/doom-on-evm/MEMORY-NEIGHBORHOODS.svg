@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="790" viewBox="0 0 1000 790" role="img" aria-labelledby="title desc">
+  <title id="title">Two sprite reads beyond the end of their artwork</title>
+  <desc id="desc">Measured neighborhoods in the adapted little-endian ARM64/LP64 reference, with eight-byte alignment and 40-byte allocator headers. All offsets are relative to the start of each sprite payload. PLAYW0 occupies offsets 0 through 1127. Its neighbor header starts at 1128; the sample at 1148 reaches header offset 20, the source-written identifier low byte 0x11, decimal 17. BLUDA0 occupies 0 through 323, followed by resource alignment slack at 324 through 327. Its neighbor header starts at 328. The sample at 332 reaches header offset 4, uninitialized padding before the user pointer. There is no universal native value for that padding. Widths are schematic, not proportional to byte counts.</desc>
+  <defs>
+    <pattern id="unknown" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <rect width="9" height="9" fill="#fff0ce"/>
+      <path d="M0 0V9" stroke="#e6c888" stroke-width="2"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10Z" fill="#203c49"/>
+    </marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #20313b; }
+      .title { font-size: 27px; font-weight: 700; }
+      .label { font-size: 20px; font-weight: 700; }
+      .small { font-size: 18px; }
+      .mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 18px; }
+      .muted { fill: #556570; }
+      .block { stroke: #7c8c95; stroke-width: 1.5; }
+      .guide { fill: none; stroke: #71818b; stroke-width: 1.5; }
+      .sample { fill: none; stroke: #203c49; stroke-width: 2; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1000" height="790" rx="12" fill="#fafaf7"/>
+  <text x="40" y="43" class="title">Where the renderer found its next byte</text>
+  <text x="40" y="76" class="small muted">Adapted ARM64/LP64 reference · little-endian · 8-byte alignment</text>
+  <text x="40" y="102" class="small muted">Offsets from each sprite payload. Schematic widths; these are two separate observations.</text>
+
+  <text x="40" y="150" class="label">PLAYW0</text>
+  <text x="160" y="150" class="small">A source-written identifier</text>
+  <text x="40" y="193" class="small muted">Original resource</text>
+  <text x="650" y="193" text-anchor="middle" class="small muted">Neighboring allocator header · 40 bytes</text>
+  <path d="M340 212V203H960V212" class="guide"/>
+  <rect x="40" y="220" width="300" height="95" fill="#e3edf2" class="block"/>
+  <rect x="340" y="220" width="250" height="95" fill="#e9ebed" class="block"/>
+  <rect x="590" y="220" width="180" height="95" fill="#cbece0" class="block"/>
+  <rect x="770" y="220" width="190" height="95" fill="#e9ebed" class="block"/>
+  <text x="190" y="250" text-anchor="middle" class="label">Sprite payload</text>
+  <text x="190" y="280" text-anchor="middle" class="mono">0–1127</text>
+  <text x="465" y="250" text-anchor="middle" class="small">Earlier header fields</text>
+  <text x="465" y="280" text-anchor="middle" class="mono">1128–1147</text>
+  <text x="680" y="245" text-anchor="middle" class="label">Identifier</text>
+  <text x="680" y="272" text-anchor="middle" class="mono">1148–1151</text>
+  <text x="680" y="299" text-anchor="middle" class="mono">11 4a 1d 00</text>
+  <text x="865" y="250" text-anchor="middle" class="small">Remaining fields</text>
+  <text x="865" y="280" text-anchor="middle" class="mono">1152–1167</text>
+  <path d="M340 214V328" class="guide" stroke-dasharray="4 4"/>
+  <text x="340" y="352" text-anchor="middle" class="small">Logical end: 1128</text>
+  <path d="M624 352V318" class="sample"/>
+  <text x="640" y="352" class="mono">Sample 1148 = header +20</text>
+  <text x="40" y="391" class="small">Original allocator writes 0x1d4a11. Sampled byte 0x11 (17) → lighting table → pixel 139.</text>
+
+  <path d="M40 418H960" stroke="#d5dcdf"/>
+  <text x="40" y="458" class="label">BLUDA0</text>
+  <text x="160" y="458" class="small">Padding with no source-defined value</text>
+  <text x="40" y="503" class="small muted">Original resource</text>
+  <text x="670" y="503" text-anchor="middle" class="small muted">Neighboring allocator header · 40 bytes</text>
+  <path d="M380 522V513H960V522" class="guide"/>
+  <rect x="40" y="530" width="220" height="104" fill="#e3edf2" class="block"/>
+  <rect x="260" y="530" width="120" height="104" fill="#f0eee7" class="block"/>
+  <rect x="380" y="530" width="110" height="104" fill="#e9ebed" class="block"/>
+  <rect x="490" y="530" width="130" height="104" fill="url(#unknown)" class="block"/>
+  <rect x="620" y="530" width="160" height="104" fill="#e9ebed" class="block"/>
+  <rect x="780" y="530" width="180" height="104" fill="#e9ebed" class="block"/>
+  <text x="150" y="566" text-anchor="middle" class="label">Sprite payload</text>
+  <text x="150" y="599" text-anchor="middle" class="mono">0–323</text>
+  <text x="320" y="557" text-anchor="middle" class="small">Alignment</text>
+  <text x="320" y="581" text-anchor="middle" class="small">slack</text>
+  <text x="320" y="611" text-anchor="middle" class="mono">324–327</text>
+  <text x="435" y="566" text-anchor="middle" class="small">Size</text>
+  <text x="435" y="599" text-anchor="middle" class="mono">328–331</text>
+  <text x="555" y="557" text-anchor="middle" class="small">Uninitialized</text>
+  <text x="555" y="581" text-anchor="middle" class="small">padding</text>
+  <text x="555" y="611" text-anchor="middle" class="mono">332–335</text>
+  <text x="700" y="566" text-anchor="middle" class="small">User pointer</text>
+  <text x="700" y="599" text-anchor="middle" class="mono">336–343</text>
+  <text x="870" y="557" text-anchor="middle" class="small">Remaining</text>
+  <text x="870" y="581" text-anchor="middle" class="small">fields</text>
+  <text x="870" y="611" text-anchor="middle" class="mono">344–367</text>
+  <path d="M260 524V647" class="guide" stroke-dasharray="4 4"/>
+  <text x="260" y="672" text-anchor="middle" class="small">Logical end: 324</text>
+  <path d="M504 672V637" class="sample"/>
+  <text x="524" y="672" class="mono">Sample 332 = header +4</text>
+  <text x="40" y="716" class="small">The read passes the alignment slack and size field, then reaches padding inside the header.</text>
+  <text x="40" y="746" class="small">Strict mode: unknown. Initial-zero policy: zero only for bytes whose history makes them eligible.</text>
+</svg>

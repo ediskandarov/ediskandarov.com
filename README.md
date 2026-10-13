@@ -147,3 +147,26 @@ npm run deploy
 ```
 
 GitHub Actions handles CI and deployment for this project; there is no need to connect the repository to Cloudflare Workers Builds as well.
+
+## Large media preview and publication
+
+Posts can use `/media/posts/<slug>/<filename>` in Markdown images, links, and
+HTML `src`, `href`, and `poster` attributes. Put local copies under the ignored
+`media/posts/<slug>/` directory. `npm run dev` serves them with byte-range support
+for video seeking. They are never copied into `dist/`.
+
+Production Markdown rendering changes these paths to
+`https://media.ediskandarov.com/posts/<slug>/<filename>`. To use a different host,
+set the build process environment variable, for example:
+
+```sh
+MEDIA_BASE_URL=https://cdn.example.com npm run build
+```
+
+This setting does not upload files or provision storage. The public host and
+matching objects must exist before publishing a post. Direct external URLs remain
+unchanged; small `/images/...` assets still ship with the site. Frontmatter social
+images use explicit public URLs as before. Keep unfinished posts as drafts.
+
+The first imported essay and the next agent's storage/upload checklist are in
+[the DOOM article handoff](docs/doom-on-evm-import.md).

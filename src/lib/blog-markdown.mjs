@@ -18,7 +18,12 @@ function textContent(node) {
   return node.value ?? (node.children ?? []).map(textContent).join("");
 }
 
-export default function blogMarkdown() {
+export default function blogMarkdown({ mediaBaseUrl = "" } = {}) {
+  const base = mediaBaseUrl.replace(/\/$/, "");
+  if (base && !/^https:\/\//.test(base))
+    throw new Error("MEDIA_BASE_URL must be an HTTPS URL");
+  const mediaUrl = (url) =>
+    base && url?.startsWith("/media/") ? `${base}/${url.slice(7)}` : url;
   return (tree, file) => {
     // The layout supplies the title. Keep legacy Markdown untouched on disk.
     const first = tree.children[0];
@@ -33,6 +38,14 @@ export default function blogMarkdown() {
     function visit(parent) {
       if (!parent.children) return;
       parent.children = parent.children.map((node) => {
+        if (node.url) node.url = mediaUrl(node.url);
+        if (node.type === "html" && base) {
+          node.value = node.value.replace(
+            /\b(src|href|poster)=(['"])(\/media\/[^'"<>]*)\2/g,
+            (_, attribute, quote, url) =>
+              `${attribute}=${quote}${escapeHtml(mediaUrl(url).replace(/&amp;/g, "&"))}${quote}`,
+          );
+        }
         if (
           node.type === "paragraph" &&
           node.children.length === 1 &&
@@ -50,7 +63,7 @@ export default function blogMarkdown() {
             .toLowerCase();
           const type = videoTypes[extension];
           if (type && ["https:", "http:"].includes(url.protocol)) {
-            const src = escapeHtml(image.url);
+            const src = escapeHtml(mediaUrl(image.url));
             const caption = escapeHtml(image.alt || "Video");
             return {
               type: "html",
