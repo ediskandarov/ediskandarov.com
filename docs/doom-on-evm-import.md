@@ -43,16 +43,21 @@ manuscript: it supplies assets only, not the imported prose.
 
 No bucket was created and no objects were uploaded during the original import.
 The user has since created an R2 bucket and connected `media.ediskandarov.com`.
-Uploads remain to be implemented. Credentials must remain outside Git.
+The manual production workflow now uploads manifest media and verifies its public
+URLs before deploying the site. Its first authenticated run remains pending.
+Credentials must remain outside Git.
 
-1. Confirm the existing article-media R2 bucket name and its connection to
-   `media.ediskandarov.com`. Refer to the
+1. Set the GitHub repository variable `R2_BUCKET` to the existing article-media
+   bucket name. Confirm its connection to `media.ediskandarov.com`. Refer to the
    [Cloudflare custom-domain instructions](https://developers.cloudflare.com/r2/buckets/public-buckets/).
-2. Upload only the 10 `storage: external` entries in the manifest. Object keys are
+2. The workflow uploads only the 10 `storage: external` entries in the manifest. Object keys are
    the manifest `file` values with the leading `media/` removed; for example,
    `posts/doom-on-evm/ACCEPTED_E1M1_VIDEO.mp4`. Verify each local SHA-256 first.
    Do not upload the entire source archive or any commercial WAD.
-3. The installed Wrangler supports `r2 object put`. For example, after choosing
+3. Add **Account → Workers R2 Storage → Edit** to the Cloudflare deployment token
+   and configure the GitHub secrets. The complete setup instructions are in the
+   [README](../README.md#configure-github-secrets-and-variables). The installed
+   Wrangler also supports manual `r2 object put`. For example, after choosing
    the actual bucket name and authenticating, upload one object with:
 
    ```sh
@@ -61,10 +66,12 @@ Uploads remain to be implemented. Credentials must remain outside Git.
      --content-type video/mp4 --remote
    ```
 
-   Use `image/png` for PNGs and `image/gif` for GIFs. Prefer a short cache lifetime
-   until publication is final; these filenames are not content-addressed.
+   The automated uploader uses `image/png` for PNGs and `image/gif` for GIFs,
+   inline disposition, and a five-minute cache lifetime. These filenames are not
+   content-addressed.
 
-4. Verify all 10 public URLs return the expected MIME type and bytes. Check a
+4. The workflow verifies all 10 public URLs return the expected metadata and
+   SHA-256 hashes, and that video seeking requests work. After it passes, check a
    video range request returns `206` and the correct `Content-Range`, then verify
    real browser playback and seeking. Native media elements currently have no
    `crossorigin` attribute; this import does not require canvas access to media.
@@ -79,7 +86,7 @@ Uploads remain to be implemented. Credentials must remain outside Git.
 
 A fresh Git checkout includes the manuscript, diagrams, and all 10 external
 media source files. Production uses external URLs and excludes the media bytes
-from the site output; uploads to R2 are a separate step.
+from the site output; the production workflow uploads them to R2 separately.
 
 ## Verified checkpoint
 
