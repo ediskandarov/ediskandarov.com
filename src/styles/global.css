@@ -477,6 +477,12 @@ main {
   min-width: 660px;
 }
 
+.prose .diagram-scroll.natural-size img {
+  width: auto;
+  min-width: 0;
+  max-width: none;
+}
+
 .prose #EVM_ARCHITECTURE img {
   min-width: 470px;
   max-width: 557px;

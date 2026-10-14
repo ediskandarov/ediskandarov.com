@@ -1,6 +1,4 @@
 ---
-import { getImage } from "astro:assets";
-import portrait from "../../public/me.jpg";
 import { site } from "../lib/site";
 import "../styles/global.css";
 
@@ -18,7 +16,7 @@ const {
   title,
   description = site.description,
   image,
-  imageAlt = image ? (title ?? site.name) : site.name,
+  imageAlt = title ?? site.name,
   article = false,
   date,
   updated,
@@ -26,10 +24,7 @@ const {
 } = Astro.props;
 const pageTitle = title ? `${title} — ${site.name}` : site.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const defaultImage = image
-  ? undefined
-  : await getImage({ src: portrait, width: 600, format: "jpg", quality: 80 });
-const socialImage = new URL(image ?? defaultImage!.src, Astro.site);
+const socialImage = image ? new URL(image, Astro.site) : undefined;
 const path = Astro.url.pathname.replace(/\/$/, "");
 ---
 
@@ -49,13 +44,24 @@ const path = Astro.url.pathname.replace(/\/$/, "");
     <meta property="og:title" content={title ?? site.title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={socialImage} />
-    <meta property="og:image:alt" content={imageAlt} />
-    <meta name="twitter:card" content="summary_large_image" />
+    {socialImage && (
+      <>
+        <meta property="og:image" content={socialImage} />
+        <meta property="og:image:alt" content={imageAlt} />
+      </>
+    )}
+    <meta
+      name="twitter:card"
+      content={socialImage ? "summary_large_image" : "summary"}
+    />
     <meta name="twitter:title" content={title ?? site.title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={socialImage} />
-    <meta name="twitter:image:alt" content={imageAlt} />
+    {socialImage && (
+      <>
+        <meta name="twitter:image" content={socialImage} />
+        <meta name="twitter:image:alt" content={imageAlt} />
+      </>
+    )}
     {date && (
       <meta property="article:published_time" content={date.toISOString()} />
     )}
