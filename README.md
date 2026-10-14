@@ -48,7 +48,7 @@ git add content/posts/something-i-learned-while-building.md
 git commit -m "📝 Publish something I learned while building"
 ```
 
-The filename becomes `/posts/something-i-learned-while-building`. Keep it stable after publishing. Dates sort the archive; the filename does not need a date prefix. `author` defaults to Ed Iskandarov. Optional `updated`, `image`, and `imageAlt` fields set the update date and social preview image. Use a public image URL or a path such as `/images/my-post.jpg`.
+The filename becomes `/posts/something-i-learned-while-building`. Keep it stable after publishing. Dates sort the archive; the filename does not need a date prefix. `author` defaults to Ed Iskandarov. Optional `updated`, `image`, and `imageAlt` fields set the update date and social preview image. Link previews have no image by default; an explicit `image` opts a post into an image preview. Use a public image URL or a path such as `/images/my-post.jpg`.
 
 Drafts are excluded from the production homepage, archive, routes, and sitemap.
 

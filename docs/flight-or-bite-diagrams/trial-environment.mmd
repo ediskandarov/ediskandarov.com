@@ -1,0 +1,8 @@
+flowchart TD
+    World["Trial environment"] --> Obs["Sugar, bitter, looming, hunger"]
+    Obs --> Arbiter["One arbiter per episode"]
+    Arbiter --> Action["EAT, ESCAPE, or IDLE"]
+    Action --> Outcome["Threat outcome and energy update"]
+    Outcome --> Alive{"Still alive?"}
+    Alive -->|Yes| World
+    Alive -->|No| Score["Record completed trials"]

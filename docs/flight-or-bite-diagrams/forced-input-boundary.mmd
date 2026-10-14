@@ -1,0 +1,6 @@
+flowchart TD
+    Input["External looming events"] --> Forced["Force LC4 and LPLC2 spikes"]
+    Forced --> Network["Downstream network"]
+    Network --> Escape["DNp01 escape readout"]
+    CL["cL20 inhibitory input"] -.-> Boundary["Cannot prevent forced source spikes"]
+    Boundary -.-> Forced

@@ -1,0 +1,8 @@
+flowchart TD
+    Ref["Brian2 reference trial"] --> Inputs["Recorded stimulated-neuron spikes"]
+    Ref --> TraceA["Reference network spike trace"]
+    Inputs --> Event["Replay in event backend"]
+    Event --> TraceB["Event network spike trace"]
+    TraceA --> Compare["Compare neuron and integer timestep pairs"]
+    TraceB --> Compare
+    Compare --> Decode["Compare decoded action and decision time"]
