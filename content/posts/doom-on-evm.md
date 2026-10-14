@@ -31,6 +31,8 @@ The original idea was the familiar DOOM question applied to an execution environ
 
 From the first recorded development work on Friday, October 9, 2026, we reached the nine standalone Episode One recordings by Sunday. The public-release merge followed on Monday.
 
+The port now contains over 22,000 lines of Solidity. I used Codex agents working in parallel, with some delegating parts of their work to other agents. There were 44 agent sessions in total.
+
 The EVM is the machine that ordinarily executes Ethereum smart contracts. Solidity compiles into instructions for it. Nothing about that makes Solidity an attractive language for a shooter; it made it the language of this experiment. I wanted the game's calculations to happen there, including the choice of every pixel in the picture.
 
 That still left a useful choice of target. Public Ethereum imposes constraints that make this a very different proposition from running a local experiment. I was happy to use Anvil, a local Ethereum development node, with relaxed gas, code-size and memory limits. Gas is the EVM's accounting for execution work. Here, a high gas bill was a measurement, rather than a payment to a public network. The instruction set remained ordinary EVM; there was no special instruction that handed DOOM off to a native engine. This did not establish Mainnet deployability.
