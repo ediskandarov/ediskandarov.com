@@ -7,5 +7,6 @@ export const site = {
   links: [
     { label: "GitHub", href: "https://github.com/ediskandarov" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/ediskandarov/" },
+    { label: "Telegram", href: "https://t.me/ediskandarov" },
   ],
 };
