@@ -28,4 +28,9 @@ const posts = await getPosts({ includeDrafts: import.meta.env.DEV });
       <p class="empty-state">The first post is on its way.</p>
     )}
   </section>
+  <section class="elsewhere" aria-labelledby="books-title">
+    <h2 id="books-title">Books</h2>
+    <p>My reading list, on software, teams, business, and ideas.</p>
+    <a href="/books">Browse my books</a>
+  </section>
 </BaseLayout>

@@ -87,6 +87,12 @@ const path = Astro.url.pathname.replace(/\/$/, "");
             Writing
           </a>
           <a
+            href="/books"
+            aria-current={path === "/books" ? "page" : undefined}
+          >
+            Books
+          </a>
+          <a
             href="/about"
             aria-current={path === "/about" ? "page" : undefined}
           >

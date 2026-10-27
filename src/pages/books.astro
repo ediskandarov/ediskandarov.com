@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Books from "../../content/books.md";
+---
+
+<BaseLayout
+  title="Books"
+  description="My reading list: books on leadership, startups, software, and ideas."
+>
+  <header class="page-heading">
+    <h1>Books</h1>
+  </header>
+  <div class="prose">
+    <Books />
+  </div>
+</BaseLayout>
